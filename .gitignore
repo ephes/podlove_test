@@ -1,0 +1,12 @@
+# wordpress
+wp-*.php
+wp-admin
+wp-content
+wp-includes
+xmlrpc.php
+index.php
+license.txt
+readme.html
+
+# mariadb
+mariadb
