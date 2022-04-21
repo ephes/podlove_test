@@ -86,4 +86,16 @@ and switch Beta to "on".
 $ rm master.zip
 ```
 
+# Caveats
+
+## Podlovers.org npm install
+
+Had to install vips via homebrew, because there are no pre-build binaries
+for Apple M1.
+
+```shell
+$ brew install vips
+```
+
+Whoa vips is a hell of a dependency (pulled 500MB qt for example :().
 
