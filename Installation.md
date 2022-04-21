@@ -82,4 +82,8 @@ $ wget https://github.com/podlove/podlove-beta-tester/archive/master.zip
 Upload + activate Beta in wordpress admin. Go to settings -> Podlove Beta Tester
 and switch Beta to "on".
 
+```shell
+$ rm master.zip
+```
+
 
