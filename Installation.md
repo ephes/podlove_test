@@ -73,6 +73,11 @@ And then click through wordpress five minute installation forms.
 
 # Install Podlove Publisher Beta
 
+Install Podlove Publisher Stable via wordpress plugins menu item.
+Install and activate all 3 podlove plugins. Go to the Settings -> Permalinks
+page and switch the permalink structure to "Post name". At this point
+this endpoint should work: `http://localhost:8000/wp-json/podlove/v2/episodes/`.
+
 Download Beta:
 
 ```shell
