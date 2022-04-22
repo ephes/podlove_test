@@ -120,7 +120,7 @@ post_max_size = 256M
 - If you don't change the permalink format, api endpoints wont work
 - If you only upload the beta, podlove and episode menu items are missing 
 - After changing the upload location, clicking verify does not work (although it shows the correct url and duration is set automatically), you have to change the slug - this is probably a bug in podlove, ah verify_all works, too
-- Still haven't found the api :(
+- Using files from wordpress media library did not work
 
 # Cleanup
 
