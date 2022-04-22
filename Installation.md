@@ -56,11 +56,7 @@ $ mysql -u jochen -e "create database wordpress;"
 Download tarball? wtf..
 
 ```shell
-$ wget http://wordpress.org/latest.tar.gz
-$ tar xfz latest.tar.gz
-$ mv wordpress/* ./
-$ rm -r wordpress/
-$ rm latest.tar.gz
+$ wget http://wordpress.org/latest.tar.gz && tar xfz latest.tar.gz && mv wordpress/* ./ && rm -r wordpress/ && rm latest.tar.gz
 ```
 
 # Start php/wordpress development server
