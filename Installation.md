@@ -109,6 +109,13 @@ upload_max_filesize = 256M
 post_max_size = 256M
 ```
 
+## Podlove Publisher
+
+- If you only upload the beta, podlove and episode menu items are missing 
+- Episodes are only savable after podcast settings have been completed
+- After changing the upload location, clicking verify does not work, you have to change the slug - this is probably a bug in podlove
+- Still haven't found the api :(
+
 # Cleanup
 
 If you want to reinstall wordpress, you need to remove the wordpress
