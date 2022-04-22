@@ -122,6 +122,6 @@ If you want to reinstall wordpress, you need to remove the wordpress
 files.
 
 ```shell
-$ rm index.php license.txt readme.html wp-*
 $ rm -r wp-admin/ wp-content/ wp-includes/ xmlrpc.php
+$ rm index.php license.txt readme.html wp-*
 ```
