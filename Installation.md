@@ -99,6 +99,16 @@ $ brew install vips
 
 Whoa vips is a hell of a dependency (pulled 500MB qt for example :().
 
+## PHP max Upload File Size
+
+The default is 2M, which does not make sense for podcasts. Increase
+it by modifying the php.ini file `/opt/homebrew/etc/php/8.1/php.ini`
+
+```php
+upload_max_filesize = 256M
+post_max_size = 256M
+```
+
 # Cleanup
 
 If you want to reinstall wordpress, you need to remove the wordpress
