@@ -126,3 +126,21 @@ files.
 ```shell
 $ rm -r mariadb/ wp-admin/ wp-content/ wp-includes/ xmlrpc.php index.php license.txt readme.html wp-*.php
 ```
+
+## Podlovers.org Static Site Generator
+
+Checkout project and install via npm:
+
+```shell
+$ git clone https://github.com/podlove/podlovers.org.git
+$ cd podlovers.org
+$ npm install
+```
+
+- `env NODE_APP_INSTANCE=podlovers npm run build` does not work
+- `env NODE_APP_INSTANCE=forschergeist npm run build` use this config as a template for your own project
+
+Make sure to use an url as poster image for your podcast in publisher, if
+you upload an image `npm run build` just hangs. The poster image url is
+published by the api and this url does not work. Either timeout or the php
+dev server crashes.
