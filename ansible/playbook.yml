@@ -1,0 +1,18 @@
+- hosts: localhost
+  vars:
+    - user_name: podlove
+    - database_name: "{{ user_name }}"
+  tasks:
+    - name: "Include secret vars"
+      include_vars: secrets.yml
+
+    - name: Add the unix user with a bash shell
+      user:
+        name: "{{ user_name }}"
+        shell: /bin/bash
+
+    - name: Create a new mysql database
+      community.mysql.mysql_db:
+        name: "{{ database_name }}"
+        login_password: "{{ mariadb_root_password }}"
+        state: present

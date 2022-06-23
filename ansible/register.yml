@@ -1,0 +1,81 @@
+- hosts: staging
+  vars:
+    - username: deploy
+    - home_path: "/home/{{ username }}"
+    - python_path: "{{ home_path }}/site/venv/bin/python"
+    - ansible_python: "{{ home_path }}/ansible_venv/bin/python"
+    - ansible_playbook_path: "{{ home_path }}/ansible_venv/bin/ansible-playbook"
+    - service_path: "{{ home_path }}/site/services/podlove"
+
+  tasks:
+    - name: "Include secret vars"
+      include_vars: secrets.yml
+
+    - name: Create service directory
+      file:
+        path: "{{ service_path }}"
+        state: directory
+        owner: "{{ username }}"
+
+    - name: Copy private variables
+      ansible.builtin.copy:
+        src: secrets.yml
+        dest: "{{ service_path }}/secrets.yml"
+        owner: "{{ username }}"
+        mode: "0644"
+
+    - name: Create .vault_password file install
+      template:
+        src: vault_password.template.j2
+        dest: "{{ service_path }}/.vault_password"
+        mode: '0600'
+
+    - name: Copy service deploy playbook
+      ansible.builtin.copy:
+        src: playbook.yml
+        dest: "{{ service_path }}/playbook.yml"
+        owner: "{{ username }}"
+        mode: "0644"
+
+    - name: Copy traefik.template.j2
+      ansible.builtin.copy:
+        src: traefik.template.j2
+        dest: "{{ service_path }}/traefik.template.j2"
+        owner: "{{ username }}"
+        mode: "0644"
+
+    - name: Copy service deploy config
+      ansible.builtin.copy:
+        src: config.json
+        dest: "{{ service_path }}/config.json"
+        owner: "{{ username }}"
+        mode: "0400"
+
+    - name: Copy inventory directory install
+      ansible.builtin.copy:
+        src: inventory
+        dest: "{{ service_path }}"
+        owner: "{{ username }}"
+
+    - name: Create service deploy script install
+      template:
+        src: deploy.py.j2
+        dest: "{{ service_path }}/deploy.py"
+        owner: "{{ username }}"
+        mode: "0500"
+
+    - name: Create sudoers file for deploy scripts
+      template:
+        src: sudoers.template.j2
+        dest: /etc/sudoers.d/podlove_as_root
+        mode: '0440'
+
+    - name: Copy systemd service config
+      ansible.builtin.copy:
+        src: systemd.service.j2
+        dest: "{{ service_path }}/systemd.service.j2"
+        owner: "{{ username }}"
+        mode: "0400"
+
+    - name: Install PyMySQL into ansible venv
+      shell: "{{ ansible_python }} -m pip install --upgrade PyMySQL"
