@@ -28,15 +28,32 @@
         name: "{{ user_name }}"
         shell: /bin/bash
 
+    - name: Create a new mysql database
+      community.mysql.mysql_db:
+        name: "{{ database_name }}"
+        login_password: "{{ mariadb_root_password }}"
+        state: present
+
+    - name: Create mysql user with access to previously created database
+      community.mysql.mysql_user:
+        state: present
+        name: "{{ user_name }}"
+        login_password: "{{ mariadb_root_password }}"
+        password: "{{ database_password }}"
+        priv:
+          'podlove.*': 'ALL,GRANT'
+
     - name: Download wordpress source
       unarchive:
         src: https://wordpress.org/latest.tar.gz
         dest: "{{ home_dir }}"
         remote_src: yes
         extra_opts: [--strip-components=1]
+        owner: "{{ user_name }}"
 
-    - name: Create a new mysql database
-      community.mysql.mysql_db:
-        name: "{{ database_name }}"
-        login_password: "{{ mariadb_root_password }}"
-        state: present
+    - name: Create wp-config file
+      template:
+        src: wp-config-sample.php.j2
+        dest: "{{ home_dir }}/wp-config.php"
+        mode: '0400'
+        owner: "{{ user_name }}"
