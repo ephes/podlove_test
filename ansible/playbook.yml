@@ -40,8 +40,7 @@
         name: "{{ user_name }}"
         login_password: "{{ mariadb_root_password }}"
         password: "{{ database_password }}"
-        priv:
-          'podlove.*': 'ALL,GRANT'
+        priv: "{{ database_name }}.*:ALL,GRANT"
 
     - name: Download wordpress source
       unarchive:
