@@ -2,6 +2,7 @@
   vars:
     - user_name: podlove
     - database_name: "{{ user_name }}"
+    - home_dir: "/home/{{ user_name }}"
     - default_path: "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
   tasks:
     - name: "Include secret vars"
@@ -20,12 +21,19 @@
 
     - name: Install required php packages
       apt:
-        name: ["php8.1"]
+        name: ["php8.1", "php8.1-mysql"]
 
     - name: Add the unix user with a bash shell
       user:
         name: "{{ user_name }}"
         shell: /bin/bash
+
+    - name: Download wordpress source
+      unarchive:
+        src: https://wordpress.org/latest.tar.gz
+        dest: "{{ home_dir }}"
+        remote_src: yes
+        extra_opts: [--strip-components=1]
 
     - name: Create a new mysql database
       community.mysql.mysql_db:
