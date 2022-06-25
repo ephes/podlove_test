@@ -1,4 +1,22 @@
 <?php
+
+/** ssl stuff */
+define('.COOKIE_DOMAIN.', '{{ fqdn }}');
+define('.SITECOOKIEPATH.', '.');
+
+if(isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+        $list = explode(',',$_SERVER['HTTP_X_FORWARDED_FOR']);
+        $_SERVER['REMOTE_ADDR'] = $list[0];
+  }
+define( 'WP_HOME', 'https://{{ fqdn }}' );
+define( 'WP_SITEURL', 'https://{{ fqdn }}' );
+$_SERVER['HTTP_HOST'] = '{{ fqdn }}';
+$_SERVER['REMOTE_ADDR'] = 'https://{{ fqdn }}';
+$_SERVER[ 'SERVER_ADDR' ] = '{{ fqdn }}';
+
+if ($_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https')
+       $_SERVER['HTTPS']='on';
+
 /**
  * The base configuration for WordPress
  *
@@ -92,3 +110,4 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /** Sets up WordPress vars and included files. */
 require_once ABSPATH . 'wp-settings.php';
+
