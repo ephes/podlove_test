@@ -71,7 +71,7 @@
     - name: Create traefik service config
       template:
         src: traefik.template.j2
-        dest: "/etc/traefik/dynamic/{{ fqdn }}.traefik.yml"
+        dest: "/etc/traefik/dynamic/{{ site_id }}.traefik.yml"
         mode: '0644'
       environment:
         PATH: "{{ default_path }}"
@@ -79,7 +79,7 @@
     - name: Create systemd service config
       template:
         src: systemd.service.j2
-        dest: "/etc/systemd/system/{{ fqdn }}.service"
+        dest: "/etc/systemd/system/{{ site_id }}.service"
         mode: '0644'
       environment:
         PATH: "{{ default_path }}"
@@ -87,6 +87,6 @@
     - name: Make sure wordpress service is restarted
       systemd:
         state: restarted
-        name: "{{ fqdn }}"
+        name: "{{ site_id }}"
       environment:
         PATH: "{{ default_path }}"

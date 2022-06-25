@@ -1,0 +1,5 @@
+{
+    "deploy_script": "deploy.py",
+    "description": "Remove podlove instance",
+    "ansible_playbook": "services/podlove_remove/playbook.yml"
+}
