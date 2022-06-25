@@ -1,10 +1,9 @@
 - hosts: localhost
   vars:
-    - user_name: podlove
-    - database_name: "{{ user_name }}"
-    - domain: "{{ user_name }}"
-    - fqdn: "{{ domain }}.wp.staging.django-cast.com"
-    - port: 12222
+#    - user_name: podlove
+#    - database_name: "{{ user_name }}"
+#    - fqdn: "{{ user_name }}.wp.staging.django-cast.com"
+#    - port: 12222
     - home_dir: "/home/{{ user_name }}"
     - upload_max_filesize: "1G"
     - post_max_size: "1G"
@@ -72,7 +71,7 @@
     - name: Create traefik service config
       template:
         src: traefik.template.j2
-        dest: "/etc/traefik/dynamic/{{ domain }}.traefik.yml"
+        dest: "/etc/traefik/dynamic/{{ fqdn }}.traefik.yml"
         mode: '0644'
       environment:
         PATH: "{{ default_path }}"
