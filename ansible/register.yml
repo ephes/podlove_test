@@ -44,6 +44,13 @@
         owner: "{{ username }}"
         mode: "0644"
 
+    - name: Copy php.ini.j2 template
+      ansible.builtin.copy:
+        src: php.ini.j2
+        dest: "{{ service_path }}/php.ini.j2"
+        owner: "{{ username }}"
+        mode: "0644"
+
     - name: Copy wp-config template
       ansible.builtin.copy:
         src: wp-config-sample.php.j2
