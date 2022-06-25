@@ -2,6 +2,9 @@
   vars:
     - user_name: podlove
     - database_name: "{{ user_name }}"
+    - domain: "{{ user_name }}"
+    - fqdn: "{{ domain }}.wp.staging.django-cast.com"
+    - port: 8000
     - home_dir: "/home/{{ user_name }}"
     - default_path: "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
   tasks:
@@ -56,3 +59,26 @@
         dest: "{{ home_dir }}/wp-config.php"
         mode: '0400'
         owner: "{{ user_name }}"
+
+    - name: Create traefik service config
+      template:
+        src: traefik.template.j2
+        dest: "/etc/traefik/dynamic/{{ domain }}.traefik.yml"
+        mode: '0644'
+      environment:
+        PATH: "{{ default_path }}"
+
+    - name: Create systemd service config
+      template:
+        src: systemd.service.j2
+        dest: "/etc/systemd/system/{{ fqdn }}.service"
+        mode: '0644'
+      environment:
+        PATH: "{{ default_path }}"
+
+    - name: Make sure wordpress service is restarted
+      systemd:
+        state: restarted
+        name: "{{ fqdn }}"
+      environment:
+        PATH: "{{ default_path }}"
