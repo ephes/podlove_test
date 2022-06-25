@@ -27,7 +27,7 @@
 
     - name: Install required php packages
       apt:
-        name: ["php8.1", "php8.1-mysql"]
+        name: ["php8.1", "php8.1-mysql", "php8.1-curl"]
 
     - name: Create php.ini
       template:
