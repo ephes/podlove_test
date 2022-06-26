@@ -1,5 +1,0 @@
-{
-    "deploy_script": "deploy.py",
-    "description": "Install one podlove instance",
-    "ansible_playbook": "services/podlove/playbook.yml"
-}

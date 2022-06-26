@@ -1,8 +1,10 @@
 - hosts: localhost
   vars:
-#    - user_name: podlove
-#    - database_name: "{{ user_name }}"
-#    - fqdn: "{{ user_name }}.wp.staging.django-cast.com"
+#    - user_name: wp_1
+#    - site_id: "wp_podlove_wp_staging_django-cast_com"
+#    - database_name: "{{ site_id }}"
+#    - database_user: "{{ site_id }}"
+#    - fqdn: "podlove.wp.staging.django-cast.com"
 #    - port: 12222
     - home_dir: "/home/{{ user_name }}"
     - upload_max_filesize: "1G"
